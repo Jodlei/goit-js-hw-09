@@ -36,7 +36,6 @@ const options = {
     if (selectedDates[0] > Date.now()) {
       timerIsValid = true;
       chosenTime = selectedDates[0];
-      refs.startBtn.addEventListener('click', handleStartClick());
     } else {
       window.alert('Please choose a date in the future');
       timerIsValid = false;
@@ -45,14 +44,14 @@ const options = {
 };
 flatpickr(refs.input, options);
 
-function handleStartClick() {
-  console.log(timerIsValid);
+refs.startBtn.addEventListener('click', handleStartClick);
 
+function handleStartClick() {
   timerDecrease = setInterval(() => {
     if (!timerIsValid) {
       return;
     }
-
+    console.log(timerIsValid);
     const currentTime = Date.now();
     const deltaTime = chosenTime - currentTime;
 
