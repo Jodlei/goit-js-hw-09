@@ -47,6 +47,7 @@ flatpickr(refs.input, options);
 refs.startBtn.addEventListener('click', handleStartClick);
 
 function handleStartClick() {
+  window.alert('Timer Started');
   timerDecrease = setInterval(() => {
     if (!timerIsValid) {
       return;
@@ -57,9 +58,8 @@ function handleStartClick() {
 
     if (deltaTime < 900) {
       clearInterval(timerDecrease);
+      return;
     }
-    // const { days, hours, minutes, seconds } = convertMs(deltaTime);
-
     updateTimer(convertMs(deltaTime));
   }, 1000);
 }
