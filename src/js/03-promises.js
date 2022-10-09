@@ -1,18 +1,14 @@
-const refs = {
-  form: document.querySelector('.form'),
-};
+const form = document.querySelector('.form');
 
-refs.form.addEventListener('submit', onFormSubmit);
+form.addEventListener('submit', onFormSubmit);
 
 function onFormSubmit(evt) {
   evt.peventDefault();
-  let {
-    elements: { delay, step, amount },
-  } = evt.currentTarget;
-  let elDelay = +delay.value;
-  let elStep = +step.value;
-  let elAmount = +amount.value;
-  console.log(elAmount);
+
+  let elDelay = Number(e.currentTarget.delay.value);
+  const elStep = Number(e.currentTarget.step.value);
+  const elAmount = Number(e.currentTarget.amount.value);
+
   for (let position = 1; position <= elAmount; position += 1) {
     createPromise(position, elDelay)
       .then(({ position, delay }) => {
@@ -21,6 +17,7 @@ function onFormSubmit(evt) {
       .catch(({ position, delay }) => {
         console.log(`❌ Rejected promise ${position} in ${delay}ms`);
       });
+
     elDelay += elStep;
   }
 }
