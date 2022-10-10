@@ -1,4 +1,5 @@
 import flatpickr from 'flatpickr';
+import Notiflix from 'notiflix';
 import 'flatpickr/dist/flatpickr.min.css';
 
 const refs = {
@@ -37,7 +38,7 @@ const options = {
       timerIsValid = true;
       chosenTime = selectedDates[0];
     } else {
-      window.alert('Please choose a date in the future');
+      Notiflix.Notify.warning('Please choose a date in the future');
       timerIsValid = false;
     }
   },
@@ -47,16 +48,15 @@ flatpickr(refs.input, options);
 refs.startBtn.addEventListener('click', handleStartClick);
 
 function handleStartClick() {
-  window.alert('Timer Started');
+  Notiflix.Notify.warning('Timer Started');
   timerDecrease = setInterval(() => {
     if (!timerIsValid) {
       return;
     }
-    console.log(timerIsValid);
     const currentTime = Date.now();
     const deltaTime = chosenTime - currentTime;
 
-    if (deltaTime < 900) {
+    if (chosenTime < currentTime) {
       clearInterval(timerDecrease);
       return;
     }
